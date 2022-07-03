@@ -1,0 +1,1 @@
+GET https://restcountries.com/v2/lang/de?fields=name,region

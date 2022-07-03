@@ -1,0 +1,10 @@
+POST
+
+http://localhost:3030/jsonstore/phonebook
+
+{
+        "person": "Bay Huy",
+        "phone": "NEW",
+        "_id": "1234567890"
+    }
+   

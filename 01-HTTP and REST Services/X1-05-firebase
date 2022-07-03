@@ -1,0 +1,28 @@
+(to create new k/v pair in dictionary => creates key but no automatic ID for value)
+PATCH   https://http-demo-15639-default-rtdb.europe-west1.firebasedatabase.app/books/.json
+{
+    "fiction": {
+        "author": "Scott Fitzgerald",
+        "title": "Tender is the Night"
+    }
+}
+
+
+(to append more entries to this key)
+POST 	https://http-demo-15639-default-rtdb.europe-west1.firebasedatabase.app/books/fiction.json
+{
+    "author": "Irvine Welsh",
+    "title": "Filth"
+}
+
+
+POST 	https://http-demo-15639-default-rtdb.europe-west1.firebasedatabase.app/books/fiction.json
+{
+    "author": "Scott Fitzgerald",
+    "title": "Tender is the Night"
+}
+
+(then)
+DELETE https://http-demo-15639-default-rtdb.europe-west1.firebasedatabase.app/books/fiction/title.json
+DELETE https://http-demo-15639-default-rtdb.europe-west1.firebasedatabase.app/books/fiction/author.json
+

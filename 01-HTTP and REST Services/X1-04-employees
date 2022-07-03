@@ -1,0 +1,7 @@
+GET	https://dummy.restapiexample.com/api/v1/employees
+GET	https://dummy.restapiexample.com/api/v1/employee/1
+POST 	https://dummy.restapiexample.com/api/v1/create		 	{"name":"test","salary":"123","age":"23"}
+PUT	https://dummy.restapiexample.com/api/v1/update/1
+DELETE	 https://dummy.restapiexample.com/api/v1/delete/1
+
+
