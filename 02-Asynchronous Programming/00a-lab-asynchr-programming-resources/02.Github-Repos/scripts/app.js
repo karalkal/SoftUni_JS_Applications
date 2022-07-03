@@ -7,8 +7,8 @@ function loadRepos() {
 			ul.innerHTML = '';
 
 			if (!response.ok) {
-				alert ('Not found!');
-				throw Error ('Not found!');
+				alert(`${response.status} - ${response.statusText}`);
+				throw new Error(`${response.status} - ${response.statusText}`);
 			}
 
 			return response.json();
@@ -17,6 +17,7 @@ function loadRepos() {
 			let li = document.createElement('li');
 			let anchor = document.createElement('a');
 			anchor.href = element.html_url;
+			anchor.target = "_blank"
 			anchor.textContent = element.full_name;
 			li.appendChild(anchor);
 			ul.appendChild(li);
