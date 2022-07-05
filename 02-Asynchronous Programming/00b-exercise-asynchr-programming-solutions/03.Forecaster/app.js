@@ -3,37 +3,52 @@ function attachEvents() {
     const forecastContainer = document.getElementById('forecast')
     const divCurrent = document.getElementById('current')
     const divUpcoming = document.getElementById('upcoming')
+
+    let sunny = '&#x2600';          // ☀
+    let partlySunny = '&#x26C5';    // ⛅
+    let overcast = '&#x2601';       // ☁
+    let rain = '&#x2614';           // ☂
+    let degrees = '&#176';          // °
+
+    forecastContainer.style.display = 'inline'
+
     document.getElementById('submit').addEventListener('click', getWeather)
 
 
-    function getWeather(e) {
-        e.preventDefault()
-
+    function getWeather() {
         divCurrent.innerHTML = `<div class="label">Current conditions</div>`
         divUpcoming.innerHTML = ` <div class="label">Three-day forecast</div>`
 
-        // TODAY
-        fetch(`http://localhost:3030/jsonstore/forecaster/today/${location.value}`)
-            .then(response => {
-                if (response.status !== 200) {
-                    displayError()
-                }
-                return response.json()
-            })
-            .then(data => {
-                constructCurrentDiv(data)
-            })
+        // ALL
+        fetch(`http://localhost:3030/jsonstore/forecaster/locations`)
+            .then(response => response.json())
+            .then(allCities => {
+                let foundCity = allCities.find(city => city.name == location.value)
 
-        // NEXT
-        fetch(`http://localhost:3030/jsonstore/forecaster/upcoming/${location.value}`)
-            .then(response => {
-                if (response.status !== 200) {
-                    displayError()
-                }
-                return response.json()
-            })
-            .then(data => {
-                constructNextDiv(data)
+                if (!foundCity) displayError()
+
+                let locationCode = foundCity.code
+                fetch(`http://localhost:3030/jsonstore/forecaster/today/${locationCode}`)    // TODAY
+                    .then(response => {
+                        if (response.status !== 200) {
+                            displayError()
+                        }
+                        return response.json()
+                    })
+                    .then(data => {
+                        constructCurrentDiv(data)
+                    })
+
+                fetch(`http://localhost:3030/jsonstore/forecaster/upcoming/${locationCode}`)    // NEXT
+                    .then(response => {
+                        if (response.status !== 200) {
+                            displayError()
+                        }
+                        return response.json()
+                    })
+                    .then(data => {
+                        constructNextDiv(data)
+                    })
             })
     }
 
@@ -45,13 +60,13 @@ function attachEvents() {
         let symbolSpan = document.createElement('span')
         symbolSpan.classList.add('condition', 'symbol')
         if (data.forecast.condition === 'Sunny') {
-            symbolSpan.textContent = '☀' //`&#x2600;` // ☀
+            symbolSpan.innerHTML = sunny //`&#x2600;` // ☀
         } else if (data.forecast.condition === 'Partly sunny') {
-            symbolSpan.textContent = '⛅' //`&#x26C5;` // ⛅
+            symbolSpan.innerHTML = partlySunny //`&#x26C5;` // ⛅
         } else if (data.forecast.condition === 'Overcast') {
-            symbolSpan.textContent = `☁` //`&#x2601;` // ☁
+            symbolSpan.innerHTML = overcast //`&#x2601;` // ☁
         } else if (data.forecast.condition === 'Rain') {
-            symbolSpan.textContent = '☂' // `&#x2614;` // ☂
+            symbolSpan.innerHTML = rain // `&#x2614;` // ☂
         } else {
             displayError()
         }
@@ -63,9 +78,9 @@ function attachEvents() {
         citySpan.textContent = data.name
         let degreesSpan = document.createElement('span')
         degreesSpan.classList.add('forecast-data')
-        degreesSpan.textContent = data.forecast.low + '°' + '/' + data.forecast.high + '°'    // °
+        degreesSpan.innerHTML = data.forecast.low + degrees + '/' + data.forecast.high + degrees    // °
         let weatherTypeSpan = document.createElement('span')
-        weatherTypeSpan.classList.add('condition')
+        weatherTypeSpan.classList.add('forecast-data')
         weatherTypeSpan.textContent = data.forecast.condition
 
         conditionSpan.appendChild(citySpan)
@@ -82,8 +97,8 @@ function attachEvents() {
 
 
     function constructNextDiv(data) {
-        let forecastInfo = document.createElement('div')
-        forecastInfo.classList.add('forecast-info')
+        let divForecastInfo = document.createElement('div')
+        divForecastInfo.classList.add('forecast-info')
 
         for (let day = 0; day < 3; day++) {
 
@@ -93,29 +108,31 @@ function attachEvents() {
             let symbolSpan = document.createElement('span')
             symbolSpan.classList.add('symbol')
             if (data.forecast[day].condition === 'Sunny') {
-                symbolSpan.textContent = '☀' //`&#x2600;` // ☀
+                symbolSpan.innerHTML = sunny //`&#x2600;` // ☀
             } else if (data.forecast[day].condition === 'Partly sunny') {
-                symbolSpan.textContent = '⛅' //`&#x26C5;` // ⛅
+                symbolSpan.innerHTML = partlySunny //`&#x26C5;` // ⛅
             } else if (data.forecast[day].condition === 'Overcast') {
-                symbolSpan.textContent = `☁` //`&#x2601;` // ☁
+                symbolSpan.innerHTML = overcast //`&#x2601;` // ☁
             } else if (data.forecast[day].condition === 'Rain') {
-                symbolSpan.textContent = '☂' // `&#x2614;` // ☂
+                symbolSpan.innerHTML = rain // `&#x2614;` // ☂
             } else {
                 displayError()
             }
 
             let degreesSpan = document.createElement('span')
             degreesSpan.classList.add('forecast-data')
-            degreesSpan.textContent = data.forecast[day].low + '°' + '/' + data.forecast[day].high + '°'    // °
+            degreesSpan.innerHTML = data.forecast[day].low + degrees + '/' + data.forecast[day].high + degrees    // °
 
             let weatherTypeSpan = document.createElement('span')
-            weatherTypeSpan.classList.add('condition')
+            weatherTypeSpan.classList.add('forecast-data')
             weatherTypeSpan.textContent = data.forecast[day].condition
 
             upcomingSpan.appendChild(symbolSpan)
             upcomingSpan.appendChild(degreesSpan)
             upcomingSpan.appendChild(weatherTypeSpan)
-            divUpcoming.append(upcomingSpan)
+
+            divForecastInfo.appendChild(upcomingSpan)
+            divUpcoming.append(divForecastInfo)
 
             forecastContainer.style.display = 'block'
         }
