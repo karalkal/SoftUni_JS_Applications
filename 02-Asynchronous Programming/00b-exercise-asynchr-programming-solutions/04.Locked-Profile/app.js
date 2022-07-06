@@ -1,6 +1,7 @@
 function lockedProfile() {
     const main = document.getElementById('main')
     main.replaceChildren()  // clear it
+    let usersCount = 1
 
     fetch(`http://localhost:3030/jsonstore/advanced/profiles`)
         .then(response => {
@@ -24,9 +25,9 @@ function lockedProfile() {
 
                 let lockRadioBtn = document.createElement('input')
                 lockRadioBtn.type = "radio"
-                lockRadioBtn.name = `${data[person].username}Locked`
+                lockRadioBtn.name = `user${usersCount}Locked`
                 lockRadioBtn.value = "lock"
-                lockRadioBtn.checked = 'checked'
+                lockRadioBtn.setAttribute('checked', '')
                 profileEl.appendChild(lockRadioBtn)
 
                 let labelUnlock = document.createElement('label')
@@ -35,7 +36,7 @@ function lockedProfile() {
 
                 let unlockRadioBtn = document.createElement('input')
                 unlockRadioBtn.type = "radio"
-                unlockRadioBtn.name = `${data[person].username}Locked`
+                unlockRadioBtn.name = `user${usersCount}Locked`
                 unlockRadioBtn.value = "unlock"
                 profileEl.appendChild(unlockRadioBtn)
 
@@ -51,36 +52,36 @@ function lockedProfile() {
 
                 let usernameInput = document.createElement('input')
                 usernameInput.type = 'text'
-                usernameInput.name = `${data[person].username}`
-                usernameInput.value = `${data[person].username}`
+                usernameInput.name = `user${usersCount}Username`
+                usernameInput.setAttribute('value', `${data[person].username}`)
                 usernameInput.disabled = true
                 usernameInput.readOnly = true
                 profileEl.appendChild(usernameInput)
 
                 // details div starts
                 let divUserData = document.createElement('div')
-                divUserData.className = "user1Username"
+                divUserData.className = `user${usersCount}HiddenFields`
                 divUserData.hidden = true
 
                 let hr2 = document.createElement('hr')
 
                 let labelEmail = document.createElement('label')
-                labelEmail.textContent = 'Email'
+                labelEmail.textContent = 'Email:'
 
                 let emailInput = document.createElement('input')
                 emailInput.type = 'email'
-                emailInput.name = `${data[person].email}`
-                emailInput.value = `${data[person].email}`
+                emailInput.name = `user${usersCount}Email`
+                emailInput.setAttribute('value', `${data[person].email}`)
                 emailInput.disabled = true
                 emailInput.readOnly = true
 
                 let labelAge = document.createElement('label')
-                labelAge.textContent = 'Age'
+                labelAge.textContent = 'Age:'
 
                 let ageInput = document.createElement('input')
-                ageInput.type = 'text'
-                ageInput.name = `${data[person].age}`
-                ageInput.value = `${data[person].age}`
+                ageInput.type = 'email'
+                ageInput.name = `user${usersCount}Age`
+                ageInput.setAttribute('value', `${data[person].age}`)
                 ageInput.disabled = true
                 ageInput.readOnly = true
 
@@ -99,6 +100,8 @@ function lockedProfile() {
                 profileEl.appendChild(showBtn)
 
                 main.appendChild(profileEl)
+
+                usersCount++
 
             }
 
