@@ -1,29 +1,33 @@
-// import * as api from './api/users.js'
+import { initialize } from './router.js'
+import { showCatalog } from './views/catalog.js'
+import { showCreate } from './views/create.js'
+import { showDetails } from './views/details.js'
+import { showHome } from './views/home.js'
+import { showLogin } from './views/login.js'
+import { showRegister } from './views/register.js'
+import { logout } from './api/users.js'
 
-// window.api = api
-
-const main = document.querySelector('main')
-
-const homePage = document.getElementById('homePage')
-const registerPage = document.getElementById('registerPage')
-const loginPage = document.getElementById('loginPage')
-const catalogPage = document.getElementById('dashboard-holder')
-const detailsPage = document.getElementById('detailsPage')
-const createPage = document.getElementById('createPage')
 
 document.getElementById('views').remove()
 
 const links = {
-    '/': homePage,
-    '/register': registerPage,
-    '/login': loginPage,
-    '/catalog': catalogPage,
-    '/details': detailsPage,
-    '/create': createPage,
+    '/': showHome,
+    '/register': showRegister,
+    '/login': showLogin,
+    '/catalog': showCatalog,
+    '/details': showDetails,
+    '/create': showCreate,
+    '/logout': onLogout,
 }
 
-window.showSection = (name) => {
-    const section = links[name]
-    main.replaceChildren(section)
-}
+const router = initialize(links)
+router.updateNav()
 
+// start app with home
+router.goTo('/')
+
+function onLogout() {
+    logout()
+    router.updateNav()
+    router.goTo('/')
+}
