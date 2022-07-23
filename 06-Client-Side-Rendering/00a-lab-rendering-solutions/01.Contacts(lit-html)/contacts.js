@@ -34,5 +34,11 @@ export const contacts = [
         name: 'David',
         phoneNumber: '0866592475',
         email: 'david@david.com'
-    }
+    },{
+        id: 7,
+        name: 'Ivan',
+        phoneNumber: '0000',
+        email: 'david@david.com'
+    },
+
 ];
