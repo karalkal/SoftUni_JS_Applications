@@ -1,16 +1,18 @@
 import page from './node_modules/page/page.mjs';
 
 import { showLogin } from '../views/login.js';
-import { showRegister } from './views/register.js';
+import { showRegister } from '../views/register.js';
+import { logOutUser } from '../views/logout.js';
 import { showCatalog } from '../views/catalog.js';
 import { showDetails } from '../views/details.js';
 
-// page('/', showCatalog)
+page('/', showCatalog)
 page('/login', showLogin);
 page('/register', showRegister);
-
 page('/catalog', showCatalog);
 page('/catalog/:itemID', showDetails);
+
+document.getElementById('logoutBtn').addEventListener('click', logOutUser)
 
 page.start();
 
