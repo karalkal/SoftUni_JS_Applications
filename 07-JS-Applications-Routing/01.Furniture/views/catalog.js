@@ -23,27 +23,24 @@ const catalogTemplate = () => html`
     </div>
 `
 
-
 const displayCards = (item) => html`
     <div class="col-md-4">
         <div class="card text-white bg-primary">
             <div class="card-body">
                 <img src="${item.img}" />
-                <p>Description here</p>
+                <p>${item.description}</p>
                 <footer>
                     <p>Price: <span>${item.price} $</span></p>
                 </footer>
                 <div>
-                    <a href="details/:${item._id}" class="btn btn-info">Details</a>
+                    <a href="/catalog/${item._id}" class="btn btn-info">Details</a>
                 </div>
             </div>
         </div>
     </div>
 `
 
-
 async function getAllItems() {
-
     try {
         const response = await fetch('http://localhost:3030/data/catalog')
         if (response.ok == false) {
@@ -59,6 +56,4 @@ async function getAllItems() {
         alert(err.message)
         throw new Error(err.message)
     }
-
-
 }
