@@ -10,7 +10,7 @@ page('/login', showLogin);
 page('/register', showRegister);
 
 page('/catalog', showCatalog);
-page('/catalog/:${itemID}', showDetails);
+page('/catalog/:itemID', showDetails);
 
 page.start();
 

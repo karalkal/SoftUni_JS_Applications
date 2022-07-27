@@ -1,24 +1,62 @@
-import page from '../node_modules/page/page.mjs';
 import { html, render } from '../node_modules/lit-html/lit-html.js';
 
 
 const container = document.querySelector('div.container')
 
-
-export function showDetails(ctx) {
-
+export async function showDetails(ctx) {
+    let item = await getItemDetails(ctx.params.itemID)
+    render(detailsTemplate(item), container)
 }
 
-async function getItemDetails(ctx) {
+const detailsTemplate = (item) => {
+    
+    let isOwner = item._ownerId == localStorage.ownerId
+
+    return html`
+        <div class="row space-top">
+            <div class="col-md-12">
+                <h1>Furniture Details</h1>
+            </div>
+        </div>
+        <div class="row space-top">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <img src="${item.img}" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <p>Make: <span>${item.make}</span></p>
+                <p>Model: <span>${item.model}</span></p>
+                <p>Year: <span>${item.year}</span></p>
+                <p>Description: <span>${item.description}</span></p>
+                <p>Price: <span>${item.price}</span></p>
+                <p>Material: <span>${item.material}</span></p>
+                ${isOwner 
+                ? html `
+                <div>
+                    <a href=”#” class="btn btn-info">Edit</a>
+                    <a href=”#” class="btn btn-red">Delete</a>
+                </div>`
+                : null
+                }
+            </div>
+        </div>
+`
+}
+
+
+async function getItemDetails(id) {
     try {
-        const response = await fetch('http://localhost:3030/data/catalog')
+        const response = await fetch(`http://localhost:3030/data/catalog/${id}`)
         if (response.ok == false) {
             let error = await response.json();
             throw new Error(error.message);
         }
 
-        let allItems = await response.json()
-        return allItems
+        let item = await response.json()
+        return item
     }
 
     catch (err) {
