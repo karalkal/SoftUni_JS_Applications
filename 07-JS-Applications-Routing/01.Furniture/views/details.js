@@ -37,7 +37,7 @@ const detailsTemplate = (item) => {
                 ? html `
                 <div>
                     <a href="/update/${item._id}" class="btn btn-info">Edit</a>
-                    <a href="#" class="btn btn-red">Delete</a>
+                    <a href="/delete/${item._id}" class="btn btn-red">Delete</a>
                 </div>`
                 : null
                 }

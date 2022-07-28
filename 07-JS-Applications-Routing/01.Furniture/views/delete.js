@@ -1,15 +1,20 @@
-let g = {
-    "make": "Table",
-    "model": "Swedish",
-    "year": 2021,
-    "description": "Medium table",
-    "price": 235,
-    "img": "/images/table.png",
-    "material": "Hardwood",
-    "_id": "53d4dbf5-7f41-47ba-b485-43eccb91cb95",
-    "_createdOn": 1615545143015,
-    "_updatedOn": 1659034317766,
-    "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8"
-  }
+import { html, render } from "../node_modules/lit-html/lit-html.js"
+import page from "../node_modules/page/page.mjs"
 
-  console.log(g.make)
+const container = document.querySelector('div.container')
+
+export async function deleteItem(ctx) {
+    let itemID = ctx.params.itemID
+
+    let del = confirm("Are you sure you want to delete this record?");
+    if (del == false) {
+
+    } else {
+        let response = await fetch(`http://localhost:3030/data/catalog/${itemID}`, {
+            method: 'delete',
+            headers: { 'X-Authorization': localStorage.token },
+        })
+    }
+
+    page.redirect(('/'))
+}
