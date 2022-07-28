@@ -1,15 +1,17 @@
-import page from '../node_modules/page/page.mjs';
 import { html, render } from '../node_modules/lit-html/lit-html.js';
 
-const container = document.querySelector('div.container')
 
-let allItems = await getAllItems()
+const container = document.querySelector('div.container');
 
-export function showCatalog() {
-    render(catalogTemplate(), container)
+showCatalog()  // need to update each time
+
+export async function showCatalog() {
+    let allItems = await getAllItems();
+
+    render(catalogTemplate(allItems), container);
 }
 
-const catalogTemplate = () => html`
+const catalogTemplate = (allItems) => html`
     <div class="row space-top">
         <div class="col-md-12">
             <h1>Welcome to Furniture System</h1>
@@ -48,8 +50,8 @@ async function getAllItems() {
             throw new Error(error.message);
         }
 
-        let allItems = await response.json()
-        return allItems
+        let allItems = await response.json();
+        return allItems;
     }
 
     catch (err) {

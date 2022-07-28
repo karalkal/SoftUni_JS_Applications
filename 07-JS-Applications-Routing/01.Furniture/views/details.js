@@ -36,8 +36,8 @@ const detailsTemplate = (item) => {
                 ${isOwner 
                 ? html `
                 <div>
-                    <a href=”#” class="btn btn-info">Edit</a>
-                    <a href=”#” class="btn btn-red">Delete</a>
+                    <a href="/update/${item._id}" class="btn btn-info">Edit</a>
+                    <a href="#" class="btn btn-red">Delete</a>
                 </div>`
                 : null
                 }
