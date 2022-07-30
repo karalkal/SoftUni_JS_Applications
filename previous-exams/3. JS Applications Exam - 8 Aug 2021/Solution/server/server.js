@@ -1333,36 +1333,35 @@
         }
     };
     var seedData = {
-        posts: {
-            "ff436770-76c5-40e2-b231-77409eda7a61": {
-                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "Clothes",
-                "description": "We need warm winter clothes. The sizes are for children from 2 to 14 years old. If possible, made from cotton materials, no superficial ones.",
-                "address": "ul. Hristo Smirnenski 18, Sofia",
-                "phone": "0888222345",
-                "imageUrl": "/images/clothes.jpeg",
-                "_createdOn": 1617194128618,
+        books:{
+            'b559bd24-5fb6-4a42-bc48-40c17dea649d': {
+                '_ownerId': '35c62d76-8152-4626-8712-eeb96381bea8',
+                'title': 'A Court of Thorns and Roses',
+                'description': 'Feyre\'s survival rests upon her ability to hunt and kill – the forest where she lives is a cold, bleak place in the long winter months. So when she spots a deer in the forest being pursued by a wolf, she cannot resist fighting it for the flesh. But to do so, she must kill the predator and killing something so precious comes at a price ...',
+                'imageUrl': '/images/book1.png',
+                'type': 'Fiction',
+                '_createdOn': 1617797078108
             },
-            "1840a313-225c-416a-817a-9954d4609f7c": {
-                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "Toys",
-                "description": "We need toys for babies under 1.5 years old, as well as some children books and puzzles for kids under 6 years old",
-                "address": "ul. Tsanko Tsankov 5",
-                "phone": "0878787878",
-                "imageUrl": "/images/toys.jpeg",
-                "_createdOn": 1617194210928,
+            '2949b54d-b163-4a00-b65c-41fb8b641561': {
+                '_ownerId': '35c62d76-8152-4626-8712-eeb96381bea8',
+                'title': 'Outlander',
+                'description': 'The year is 1945. Claire Randall, a former combat nurse, is just back from the war and reunited with her husband on a second honeymoon when she walks through a standing stone in one of the ancient circles that dot the British Isles. Suddenly she is a Sassenach—an “outlander”—in a Scotland torn by war and raiding border clans in the year of Our Lord...1743.',
+                'imageUrl': '/images/book2.png',
+                'type': 'Other',
+                '_createdOn': 1617799443179
             },
-            "126777f5-3277-42ad-b874-76d043b069cb": {
-                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
-                "title": "School Supplies",
-                "description": "We need 20 striped notebooks and 10 squared notebooks, 5 backpacks, and other school supplies, such as pens, pencils, rulers, erasers, etc.",
-                "address": "ul. Manioka Tapioka 25",
-                "phone": "0888264871",
-                "imageUrl": "/images/school-supplies.jpeg",
-                "_createdOn": 1617194295474,
+            'f6f54fcd-0469-470b-8ffa-a33ae6c7a524': {
+                '_ownerId': '847ec027-f659-4086-8032-5173e2f9c93a',
+                'title': 'To Kill a Mockingbird',
+                'description': 'The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it. "To Kill A Mockingbird" became both an instant bestseller and a critical success when it was first published in 1960. It went on to win the Pulitzer Prize in 1961 and was later made into an Academy Award-winning film, also a classic.',
+                'imageUrl': '/images/book3.png',
+                'type': 'Classic',
+                '_createdOn': 1617799658349
             }
         },
-        donations: {}
+        likes: {
+            
+        }
     };
     var rules$1 = {
         users: {
