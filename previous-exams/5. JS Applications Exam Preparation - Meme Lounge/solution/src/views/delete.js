@@ -1,8 +1,13 @@
 import { deleteMeme } from "../api/data.js";
 
 
-export function viewDelete(ctx) {
-    deleteMeme(ctx.params.id);
+export async function viewDelete(ctx) {
 
-    ctx.page.redirect('/');
+    const choice = confirm('Are you sure you want to delete this entry?')
+
+    if (choice) {
+        await deleteMeme(ctx.params.id);
+
+        ctx.page.redirect('/');
+    }
 }

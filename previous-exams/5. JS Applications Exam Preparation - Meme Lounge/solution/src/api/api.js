@@ -62,6 +62,7 @@ export async function login(email, password) {
     let result = await post('/users/login', { email, password })
 
     let userData = {
+        username: result.username,
         email: result.email,
         id: result._id,
         token: result.accessToken

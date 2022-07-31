@@ -8,13 +8,12 @@ const updateTemplate = (submitData, itemData) => html`
             <h1>Edit Meme</h1>
             <div class="container">
                 <label for="title">Title</label>
-                <input id="title" type="text" placeholder=${itemData.title} name="title">
+                <input .value=${itemData.title} id="title" type="text" name="title">
                 <label for="description">Description</label>
-                <textarea id="description" placeholder="Enter Description" name="description">
-                    ${itemData.description}
-                </textarea>
+                <textarea .value=${itemData.description} id="description" placeholder="Enter Description"
+                    name="description"> </textarea>
                 <label for="imageUrl">Image Url</label>
-                <input id="imageUrl" type="text" placeholder=${itemData.imageUrl} name="imageUrl">
+                <input value=${itemData.imageUrl} id="imageUrl" type="text" name="imageUrl">
                 <input type="submit" class="registerbtn button" value="Edit Meme">
             </div>
         </form>

@@ -47,13 +47,11 @@ export function viewRegister(ctx) {
         event.target.reset();   // clear form fields
 
         if (username == '' || email == '' || password == '' || rePass == '' || gender == '') {
-            window.alert('Please fill all requred fields')
-            throw new Error('Please fill all requred fields')
+            return alert('Please fill all requred fields')
         }
 
         if (password != rePass) {
-            window.alert('Password entries do not match')
-            throw new Error('Password entries do not match')
+            return alert('Password entries do not match')
         }
         await register(username, email, password, gender);
         ctx.updateUserNav();
