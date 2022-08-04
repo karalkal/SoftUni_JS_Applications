@@ -1,36 +1,31 @@
 import { html, render } from '../node_modules/lit-html/lit-html.js'
-import {until} from '../node_modules/lit-html/directives/until.js';
-
 
 const container = document.querySelector('main#main-content')
 
-let allItems = await getMyItems()
+export async function viewOwnDashboard() {
+    let myItems = await getMyItems()
 
-export function viewOwnDashboard(ctx) {
-    render(dashboardTemplate(allItems), container)
+    render(dashboardTemplate(myItems), container)
 }
 
-const dashboardTemplate = (allItems) => html`
-    <section id="my-posts-page">s
-        <h1 class="title">My Posts</h1>
-
-    
+const dashboardTemplate = (myItems) => html`
+    <section id="my-posts-page">
+        <h1 class="title">My Posts</h1>    
     <!-- Display a div with information about every post (if any)-->
-    ${allItems.length > 0 
-
+    ${myItems.length > 0 
     ? html `
     <div class="my-posts">
 
-        ${allItems.map(item => html `
+        ${myItems.map(item => html `
         <div class="post">
             <h2 class="post-title">${item.title}</h2>
             <img class="post-image" src=${item.imageUrl} alt="Image of ${item.title}">
             <div class="btn-wrapper">
                 <a href="/details/${item._id}" class="details-btn btn">Details</a>
             </div>
-        </div> `)}    
-    </div> `   
-     
+        </div> `)
+        }
+    </div> `     
 
     : html `
     <!-- Display an h1 if there are no posts -->
@@ -39,6 +34,7 @@ const dashboardTemplate = (allItems) => html`
     }
 </section>
 `
+
 
 
 async function getMyItems() {
@@ -50,9 +46,10 @@ async function getMyItems() {
             throw new Error(err.message)
         }
 
-        let allItems = await response.json()
-        return allItems
-        // return []        // test if server returns empty json
+        let myItems = await response.json()
+
+        return myItems
+        // return []        // test template with no items
 
     } catch (error) {
         throw new Error(error.message)

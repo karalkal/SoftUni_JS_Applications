@@ -56,7 +56,7 @@ async function submitData(event) {
         })
 
         if (response.ok == false) {
-            let err = response.json()
+            let err = await response.json()
             throw new Error(err.message)
         }
 

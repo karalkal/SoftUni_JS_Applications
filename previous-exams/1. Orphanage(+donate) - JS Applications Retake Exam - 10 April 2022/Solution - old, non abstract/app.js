@@ -7,18 +7,19 @@ import { viewDetails } from './views/details.js'
 import { deleteItem } from './views/delete.js'
 import { viewCreate } from './views/create.js'
 import { viewEdit } from './views/edit.js'
-import { viewOwnDashboard } from './my-items.js'
+import { viewOwnDashboard } from './views/my-items.js'
 
+page(updateMenu)
 
-page('/', updateMenu, viewDashboard)
-page('/login', updateMenu, viewLogin)
-page('/logout', updateMenu, viewLogout)
-page('/register', updateMenu, viewRegister)
-page('/details/:id', updateMenu, viewDetails)
-page('/edit/:id', updateMenu, viewEdit)
-page('/my-posts', updateMenu, viewOwnDashboard)
-page('/create', updateMenu, viewCreate)
-page('/delete/:id', updateMenu, deleteItem)
+page('/', viewDashboard)
+page('/login', viewLogin)
+page('/logout', viewLogout)
+page('/register', viewRegister)
+page('/details/:id', viewDetails)
+page('/edit/:id', viewEdit)
+page('/my-posts', viewOwnDashboard)
+page('/create', viewCreate)
+page('/delete/:id', deleteItem)
 
 page.start()
 
