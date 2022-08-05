@@ -4,8 +4,8 @@ const { expect } = require('chai');
 const host = 'http://localhost:3000'; // Application host (NOT service host - that can be anything)
 const interval = 300;
 const timeout = 6000;
-const DEBUG = true;
-const slowMo = 800;
+const DEBUG = false;
+const slowMo = 500;
 
 const mockData = require('./mock-data.json');
 const endpoints = {
@@ -42,7 +42,7 @@ describe('E2E tests', function () {
 
     // Test proper
     describe('Authentication [ 20 Points ]', () => {
-        it.only('register does not work with empty fields [ 5 Points ]', async () => {
+        it('register does not work with empty fields [ 5 Points ]', async () => {
             const { post } = await createHandler(endpoints.register, { post: {} });
 
             await page.goto(host);
