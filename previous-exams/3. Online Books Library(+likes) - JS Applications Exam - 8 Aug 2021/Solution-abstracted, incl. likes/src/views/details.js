@@ -63,17 +63,9 @@ export async function viewDetails(ctx) {
     async function postLike() {       //api expects obj { bookId }
         await likeBook( {
             bookId
-          } )
-
-        //   let [bookLikes, hasNotVoted] = await Promise.all([
-        //     getLikesById(bookId),
-        //     getLikesById(bookId, loggedInUserId) === 0        
-        // ]);
-
-        // console.log(bookId, lo)
-        // ctx.render(detailsTemplate(singleBook, loggedInUserId, bookLikes, hasNotVoted, postLike));
+          } )        
         
-        ctx.page.redirect('/details/' + bookId)        //does not pass tests
+        ctx.page.redirect('/details/' + bookId)   
     }
-
+    
 }
